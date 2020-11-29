@@ -1,0 +1,4 @@
+export const FILTER_CHANGE = 'FILTER_CHANGE';
+export const SIZE_CHANGE = 'SIZE_CHANGE';
+export const STRIDE_CHANGE = 'STRIDE_CHANGE';
+export const ACTIVATION_CHANGE = 'ACTIVATION_CHANGE';
