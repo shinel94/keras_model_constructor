@@ -1,0 +1,2 @@
+export const NODE_CHANGE = 'NODE_CHANGE';
+export const ACTIVATION_CHANGE = 'ACTIVATION_CHANGE';

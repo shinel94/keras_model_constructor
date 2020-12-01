@@ -1,0 +1,3 @@
+export const HEIGHT_CHANGE = 'HEIGHT_CHANGE'
+export const WIDTH_CHANGE = 'WIDTH_CHANGE'
+export const CHANNEL_CHANGE = 'CHANNEL_CHANGE'
