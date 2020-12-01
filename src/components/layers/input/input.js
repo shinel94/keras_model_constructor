@@ -6,9 +6,10 @@ import { ADD_LAYER } from '../../../store/Model/actions'
 
 class InputLayer extends Component {
     render() {
+        const canAdd = this.props.layers.length === 0
         return (
             <div style={{margin: '3px'}}>
-                <button onClick={() => this.props.addLayerHandler({name: 'Input', height: this.props.height, width: this.props.width, channel: this.props.channel})}> InputLayer </button> InputShape HEIGHT :
+                <button disabled={!canAdd} onClick={() => this.props.addLayerHandler({name: 'Input', height: this.props.height, width: this.props.width, channel: this.props.channel})}> InputLayer </button> InputShape HEIGHT :
                 <input style={{border: '1px solid', margin: '5px'}} type={'number'} placeholder={'Hidden node / Unit Number'} value={this.props.height} onChange={(event) => this.props.heightChangeHandler(event.target.value)}/>
                 WIDTH :
                 <input style={{border: '1px solid', margin: '5px'}} type={'number'} placeholder={'Hidden node / Unit Number'} value={this.props.width} onChange={(event) => this.props.widthChangeHandler(event.target.value)}/>
@@ -23,7 +24,8 @@ const mapStateToProps = state => {
     return {
         height: state.input.height,
         width: state.input.width,
-        channel: state.input.channel
+        channel: state.input.channel,
+        layers: state.model.layers
     }
 }
 

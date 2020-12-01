@@ -6,9 +6,14 @@ import { ADD_LAYER } from '../../../store/Model/actions'
 
 class Dense extends Component{
     render() {
+        let canAdd = this.props.layers.length !== 0
+        if (canAdd){
+            const last_layer_name = this.props.layers[this.props.layers.length - 1].name;
+            canAdd = last_layer_name === 'GAP' || last_layer_name === 'Dense'
+        }
         return (
             <div style={{margin: '3px'}}>
-                <button onClick={() => this.props.addLayerHandler({name: 'Dense', unit: this.props.unit, activation: this.props.activation})}> DenseLayer </button> NodeNumber :
+                <button disabled={!canAdd} onClick={() => this.props.addLayerHandler({name: 'Dense', unit: this.props.unit, activation: this.props.activation})}> DenseLayer </button> NodeNumber :
                 <input style={{border: '1px solid', margin: '5px'}} type={'number'} placeholder={'Hidden node / Unit Number'} value={this.props.unit} onChange={(event) => this.props.nodeChangeHandler(event.target.value)}/>
                 Activation :
                 <select style={{border: '1px solid', margin: '5px'}} onChange={(event) => this.props.activationChangeHandler(event.target.value)} value={this.props.activation}>
@@ -22,7 +27,8 @@ class Dense extends Component{
 const mapStateToProps = (state) => {
     return {
         unit: state.dense.unit,
-        activation: state.dense.activation
+        activation: state.dense.activation,
+        layers: state.model.layers
     }
 }
 

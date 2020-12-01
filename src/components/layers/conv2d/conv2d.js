@@ -6,9 +6,14 @@ import { ADD_LAYER } from '../../../store/Model/actions'
 
 class Conv2D extends Component{
     render() {
+        let canAdd = this.props.layers.length !== 0
+        if (canAdd){
+            const last_layer_name = this.props.layers[this.props.layers.length - 1].name;
+            canAdd = last_layer_name === 'Conv2D' || last_layer_name === 'Deconv2D' || last_layer_name === 'Input';
+        }
         return (
             <div style={{margin: '3px'}}>
-                <button onClick={() => this.props.addLayerHandler({name: 'Conv2D', filters: this.props.filters, size: this.props.size, stride: this.props.stride, activation: this.props.activation})}> Convolution2DLayer </button> FilterNumber :
+                <button disabled={!canAdd} onClick={() => this.props.addLayerHandler({name: 'Conv2D', filters: this.props.filters, size: this.props.size, stride: this.props.stride, activation: this.props.activation})}> Convolution2DLayer </button> FilterNumber :
                 <input style={{border: '1px solid', margin: '5px'}}
                        type={'number'}
                        placeholder={'Filters'}
@@ -40,7 +45,8 @@ const mapStateToProps = (state) => {
         filters: state.conv2d.filters,
         activation: state.conv2d.activation,
         size: state.conv2d.size,
-        stride: state.conv2d.stride
+        stride: state.conv2d.stride,
+        layers: state.model.layers
     }
 }
 

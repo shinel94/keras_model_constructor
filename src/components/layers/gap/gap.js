@@ -5,9 +5,14 @@ import { ADD_LAYER } from '../../../store/Model/actions'
 
 class GAP extends Component {
     render() {
+        let canAdd = this.props.layers.length !== 0
+        if (canAdd){
+            const last_layer_name = this.props.layers[this.props.layers.length - 1].name;
+            canAdd = last_layer_name === 'Conv2D' || last_layer_name === 'Deconv2D'
+        }
         return (
             <div style={{margin: '3px'}}>
-                <button onClick={() => this.props.addLayerHandler({name: 'GAP', axis: this.props.axis})}> GAPLayer </button> poolingAxis :
+                <button disabled={!canAdd} onClick={() => this.props.addLayerHandler({name: 'GAP', axis: this.props.axis})}> GAPLayer </button> poolingAxis :
                 <input style={{border: '1px solid', margin: '5px'}} type={'number'} placeholder={'Axis'} value={this.props.axis} onChange={(event) => this.props.axisChangeHandler(event.target.value)}/>
             </div>
         )
@@ -16,7 +21,8 @@ class GAP extends Component {
 
 const mapStateToProps = state => {
     return {
-        axis: state.gap.axis
+        axis: state.gap.axis,
+        layers: state.model.layers
     }
 }
 
