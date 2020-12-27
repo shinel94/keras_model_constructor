@@ -10,6 +10,7 @@ function App() {
     <div className="App">
         <BrowserRouter>
             <Route path={'/'} render={props => <GotoButton target={'Model Build'} url={'model-build'} {...props}/>}/>
+            <Route path={'/model-build'} render={props => <GotoButton target={'Model Save'} url={'model-save'} {...props}/>}/>
             <Route path={'/model-build'} component={ModelBuilder}/>
             <Route path={'/model-save'} component={ModelSaver}/>
         </BrowserRouter>
